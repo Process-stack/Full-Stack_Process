@@ -1,12 +1,17 @@
 <?php
 $host = "localhost";
-$user = "root";
-$pass = "";
-$dbname = "grade_portal";
+$dbname = "school_db";
+$username = "root";
+$password = "";
 
-$conn = new mysqli($host, $user, $pass, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+try {
+    $conn = new PDO(
+        "mysql:host=$host;dbname=$dbname;charset=utf8",
+        $username,
+        $password
+    );
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Database Connection Failed: " . $e->getMessage());
 }
 ?>
